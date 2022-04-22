@@ -1,5 +1,6 @@
 import React from 'react'
 import './style.css'
+import { IoIosSearch } from 'react-icons/io'
 
 function App() {
   return (
@@ -7,7 +8,9 @@ function App() {
       <h1 className="title">CPF Search Engine</h1>
       <div className="input-container">
         <input type="text" placeholder="Enter your CPF..."></input>
-        <button className="btn-search">Search</button>
+        <button className="btn-search">
+          <IoIosSearch></IoIosSearch>
+        </button>
       </div>
       <div className="outcome">
         <h3>CEP: 35460000</h3>
