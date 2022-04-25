@@ -69,10 +69,17 @@
   }
 }
 
-@media only screen and (max-width: 340px) {
+@media only screen and (max-width: 410px) {
   .title {
     font-size: 32px;
   }
+
+  .input-container input{
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 340px) {
   .input-container {
     width: 100%;
     padding: 5px;
@@ -80,7 +87,6 @@
 
   .input-container input{
     width: 100%;
-    font-size: 14px;
   }
 
   .btn-search {
