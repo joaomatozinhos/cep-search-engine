@@ -4,7 +4,7 @@ import { IoIosSearch } from 'react-icons/io'
 
 function App() {
   const [input, setInput] = useState('')
-  const [dataAPI, setDataAPI] = useState([])
+  const [cep, setCep] = useState([])
 
   function handleInputChange(e) {
     let inputData = e.target.value
@@ -18,20 +18,26 @@ function App() {
 
     let url = `https://viacep.com.br/ws/${input}/json`
 
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        setDataAPI(data)
-      })
+    try {
+      fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          setCep(data)
+          setInput('')
+        })
+    } catch {
+      alert('Erro ao buscar. Digite um CEP válido.')
+      setInput('')
+    }
   }
 
   return (
     <div className="container">
-      <h1 className="title">CPF Search Engine</h1>
+      <h1 className="title">CEP Search Engine</h1>
       <div className="input-container">
         <input
           type="text"
-          placeholder="Enter your CPF..."
+          placeholder="Enter your CEP..."
           value={input}
           onChange={handleInputChange}
         ></input>
@@ -39,15 +45,18 @@ function App() {
           <IoIosSearch></IoIosSearch>
         </button>
       </div>
-      <div className="outcome">
-        <h3>CEP: {dataAPI.cep}</h3>
-        <p>Rua {dataAPI.logradouro}</p>
-        <p>Bairro {dataAPI.bairro}</p>
-        <p>Complemento: {dataAPI.complemento}</p>
-        <p>
-          {dataAPI.localidade} - {dataAPI.uf}
-        </p>
-      </div>
+
+      {Object.keys(cep).length > 0 && (
+        <div className="outcome">
+          <h3>CEP: {cep.cep}</h3>
+          <p>{cep.logradouro}</p>
+          <p>Bairro {cep.bairro}</p>
+          <p>Complemento: {cep.complemento}</p>
+          <p>
+            {cep.localidade} - {cep.uf}
+          </p>
+        </div>
+      )}
     </div>
   )
 }
