@@ -13,22 +13,40 @@ function App() {
 
   function handleSearch() {
     if (input === '') {
-      alert('Preencha algum CEP!')
+      alert('Preencha algum CEP.')
     }
 
     let url = `https://viacep.com.br/ws/${input}/json`
 
-    try {
-      fetch(url)
-        .then(response => response.json())
-        .then(data => {
-          setCep(data)
-          setInput('')
-        })
-    } catch {
-      alert('Erro ao buscar. Digite um CEP válido.')
-      setInput('')
-    }
+    // fetch(url)
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     if (data === '') {
+    //       alert('Erro ao pesquisar. Digite um CEP válido.')
+    //     }
+
+    //     setCep(data)
+    //     setInput('')
+    //   })
+
+    fetch(url)
+      .then(response => {
+        if (response.ok) {
+          return response.json()
+        }
+      })
+      .then(data => {
+        if (data === '') {
+          alert('Erro ao pesquisar. Digite um CEP válido.')
+        }
+
+        setCep(data)
+        setInput('')
+      })
+      .catch(error => {
+        alert('Erro ao pesquisar. Digite um CEP válido.')
+        setInput('')
+      })
   }
 
   return (
