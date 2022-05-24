@@ -1,6 +1,6 @@
 # CEP Search Engine
 
-Design of a CEP search engine using React JS technology.
+Project of a CEP search engine using React JS technology.
 
 ### Libraries used:
 
